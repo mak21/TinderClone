@@ -1,26 +1,103 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TinderClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rq-eJ-2Pa">
+                                <rect key="frame" x="10" y="59" width="300" height="450"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beautiful-1274051_960_720" translatesAutoresizingMaskIntoConstraints="NO" id="Fwa-ID-TpV">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="450"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8CY-tn-3dg">
+                                        <rect key="frame" x="8" y="18" width="100" height="50"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" image="unlike" translatesAutoresizingMaskIntoConstraints="NO" id="XqJ-OT-iwb">
+                                        <rect key="frame" x="192" y="18" width="100" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="h1B-pS-INa"/>
+                                            <constraint firstAttribute="height" constant="50" id="xwc-Le-IcQ"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="leading" secondItem="8rq-eJ-2Pa" secondAttribute="leadingMargin" id="3wg-Rc-CHI"/>
+                                    <constraint firstItem="Fwa-ID-TpV" firstAttribute="top" secondItem="8rq-eJ-2Pa" secondAttribute="top" id="DOI-Br-TI2"/>
+                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="top" secondItem="8rq-eJ-2Pa" secondAttribute="topMargin" constant="10" id="E1i-x4-iuX"/>
+                                    <constraint firstItem="Fwa-ID-TpV" firstAttribute="leading" secondItem="8rq-eJ-2Pa" secondAttribute="leading" id="Erx-zc-tz9"/>
+                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="top" secondItem="XqJ-OT-iwb" secondAttribute="top" id="V46-3V-j2M"/>
+                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="bottom" secondItem="XqJ-OT-iwb" secondAttribute="bottom" id="XGu-Vl-Ke1"/>
+                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="trailing" secondItem="8rq-eJ-2Pa" secondAttribute="trailingMargin" id="Xal-gT-Pi8"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fwa-ID-TpV" secondAttribute="trailing" id="ZOK-2t-aaZ"/>
+                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="leading" secondItem="8CY-tn-3dg" secondAttribute="trailing" constant="84" id="asS-0u-X73"/>
+                                    <constraint firstAttribute="bottom" secondItem="Fwa-ID-TpV" secondAttribute="bottom" id="nSq-nP-rZi"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Gwm-Tp-D8J" appends="YES" id="kV5-PO-kUb"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3BA-rL-qfN">
+                                <rect key="frame" x="137" y="28" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="resetview:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JeA-jc-6LS"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8rq-eJ-2Pa" secondAttribute="bottom" constant="59" id="19Q-wr-55p"/>
+                            <constraint firstItem="3BA-rL-qfN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2Sh-q9-ET9"/>
+                            <constraint firstItem="3BA-rL-qfN" firstAttribute="centerX" secondItem="8rq-eJ-2Pa" secondAttribute="centerX" id="Bfk-HF-0pM"/>
+                            <constraint firstItem="3BA-rL-qfN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="c3A-eU-sYw"/>
+                            <constraint firstItem="8rq-eJ-2Pa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-6" id="e1k-EP-5pE"/>
+                            <constraint firstItem="8rq-eJ-2Pa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jS3-Yd-6E8"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cardView" destination="8rq-eJ-2Pa" id="AmQ-Hf-fmu"/>
+                        <outlet property="likeImageView" destination="8CY-tn-3dg" id="nC0-yu-jMb"/>
+                        <outlet property="nopeImageView" destination="XqJ-OT-iwb" id="zda-PR-rPn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Gwm-Tp-D8J">
+                    <connections>
+                        <action selector="handleSwipe:" destination="BYZ-38-t0r" id="tcZ-i9-dIV"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="116.25" y="122.53521126760563"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="beautiful-1274051_960_720" width="332" height="376"/>
+        <image name="unlike" width="24" height="24"/>
+    </resources>
 </document>
