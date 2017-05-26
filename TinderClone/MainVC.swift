@@ -7,20 +7,50 @@
 //
 
 import UIKit
+import Firebase
+class MainVC: UIViewController {
 
-class ViewController: UIViewController {
-
+  @IBOutlet weak var segmentedController: UISegmentedControl!{
+    didSet{
+      
+        segmentedController.backgroundColor = UIColor.clear
+      segmentedController.tintColor = UIColor.red
+     
+      
+  }
+  }
+  @IBOutlet weak var chatBarButton: UIBarButtonItem!
+  @IBOutlet weak var profileBarButton: UIBarButtonItem!
   @IBOutlet weak var nopeImageView: UIImageView!
   @IBOutlet weak var likeImageView: UIImageView!
   @IBOutlet weak var cardView: UIView!
   var dividor : CGFloat!
   override func viewDidLoad() {
     super.viewDidLoad()
-    cardView.layer.cornerRadius = 10
+    chatBarButton.tintColor = UIColor.lightGray
+    profileBarButton.tintColor = UIColor.lightGray
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+   
     dividor = (view.frame.width / 2) / 0.61 //0.61 is radian value of 35 degree
   }
 
- 
+  @IBAction func logoutButtonClicked(_ sender: Any) {
+    let firebaseAuth = FIRAuth.auth()
+    do {
+      try firebaseAuth?.signOut()
+      
+    } catch let signOutError as NSError {
+      present(AlertControl.displayAlertWithTitle(title: "Error signing out:", message:" \(signOutError)"), animated: true, completion: nil)
+    }
+    
+    
+    let singInVC =  UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+    present(singInVC, animated: true, completion: nil)
+    
+  
+  }
+
 
   @IBAction func handleSwipe(_ sender: UIPanGestureRecognizer) {
     let card = sender.view!
@@ -76,5 +106,12 @@ return
     resetCard()
   }
 
+  
+  
+  @IBAction func chatBarButtonTapped(_ sender: Any) {
+    guard let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChatVC") as? ChatVC else{return}
+    
+    navigationController?.pushViewController(controller, animated: true)
+  }
 }
 

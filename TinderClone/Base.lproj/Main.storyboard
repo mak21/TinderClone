@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RK0-35-7SF">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--MainVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TinderClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MainVC" customModule="TinderClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -23,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rq-eJ-2Pa">
-                                <rect key="frame" x="10" y="59" width="300" height="450"/>
+                                <rect key="frame" x="10" y="80.5" width="300" height="407"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beautiful-1274051_960_720" translatesAutoresizingMaskIntoConstraints="NO" id="Fwa-ID-TpV">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="450"/>
+                                        <rect key="frame" x="0.0" y="31" width="300" height="407"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="10"/>
@@ -35,55 +35,95 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8CY-tn-3dg">
-                                        <rect key="frame" x="8" y="18" width="100" height="50"/>
+                                        <rect key="frame" x="0.0" y="31" width="92" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="3wM-Qr-Z65"/>
+                                            <constraint firstAttribute="width" constant="92" id="Pf3-Qv-Ogk"/>
+                                        </constraints>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" image="unlike" translatesAutoresizingMaskIntoConstraints="NO" id="XqJ-OT-iwb">
-                                        <rect key="frame" x="192" y="18" width="100" height="50"/>
+                                        <rect key="frame" x="211" y="31" width="89" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="h1B-pS-INa"/>
-                                            <constraint firstAttribute="height" constant="50" id="xwc-Le-IcQ"/>
+                                            <constraint firstAttribute="width" constant="89" id="sZl-2b-T67"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="leading" secondItem="8rq-eJ-2Pa" secondAttribute="leadingMargin" id="3wg-Rc-CHI"/>
-                                    <constraint firstItem="Fwa-ID-TpV" firstAttribute="top" secondItem="8rq-eJ-2Pa" secondAttribute="top" id="DOI-Br-TI2"/>
-                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="top" secondItem="8rq-eJ-2Pa" secondAttribute="topMargin" constant="10" id="E1i-x4-iuX"/>
-                                    <constraint firstItem="Fwa-ID-TpV" firstAttribute="leading" secondItem="8rq-eJ-2Pa" secondAttribute="leading" id="Erx-zc-tz9"/>
-                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="top" secondItem="XqJ-OT-iwb" secondAttribute="top" id="V46-3V-j2M"/>
-                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="bottom" secondItem="XqJ-OT-iwb" secondAttribute="bottom" id="XGu-Vl-Ke1"/>
-                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="trailing" secondItem="8rq-eJ-2Pa" secondAttribute="trailingMargin" id="Xal-gT-Pi8"/>
-                                    <constraint firstAttribute="trailing" secondItem="Fwa-ID-TpV" secondAttribute="trailing" id="ZOK-2t-aaZ"/>
-                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="leading" secondItem="8CY-tn-3dg" secondAttribute="trailing" constant="84" id="asS-0u-X73"/>
-                                    <constraint firstAttribute="bottom" secondItem="Fwa-ID-TpV" secondAttribute="bottom" id="nSq-nP-rZi"/>
+                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="bottom" secondItem="8CY-tn-3dg" secondAttribute="bottom" id="Bd5-2i-O2O"/>
+                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="top" secondItem="8CY-tn-3dg" secondAttribute="top" id="DeI-uS-8L5"/>
+                                    <constraint firstAttribute="width" constant="300" id="HOp-fa-aPl"/>
+                                    <constraint firstItem="Fwa-ID-TpV" firstAttribute="width" secondItem="8rq-eJ-2Pa" secondAttribute="width" id="Le8-da-EMt"/>
+                                    <constraint firstItem="Fwa-ID-TpV" firstAttribute="height" secondItem="8rq-eJ-2Pa" secondAttribute="height" id="Sn6-WE-4aw"/>
+                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="leading" secondItem="8rq-eJ-2Pa" secondAttribute="leading" id="Vcb-5t-BeD"/>
+                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="top" secondItem="Fwa-ID-TpV" secondAttribute="top" id="boB-Qn-oxf"/>
+                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="top" secondItem="8rq-eJ-2Pa" secondAttribute="top" constant="31" id="c7W-wA-86V"/>
+                                    <constraint firstItem="8CY-tn-3dg" firstAttribute="leading" secondItem="Fwa-ID-TpV" secondAttribute="leading" id="rxJ-4u-yDi"/>
+                                    <constraint firstAttribute="height" constant="407" id="tar-Yy-23U"/>
+                                    <constraint firstItem="XqJ-OT-iwb" firstAttribute="trailing" secondItem="Fwa-ID-TpV" secondAttribute="trailing" id="vKI-DM-sc3"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Gwm-Tp-D8J" appends="YES" id="kV5-PO-kUb"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3BA-rL-qfN">
-                                <rect key="frame" x="137" y="28" width="46" height="30"/>
+                                <rect key="frame" x="16" y="530" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="resetview:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JeA-jc-6LS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XES-kq-r5g">
+                                <rect key="frame" x="236" y="530" width="68" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="QjV-fv-5Wa"/>
+                                </constraints>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aQQ-KY-a4T"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8rq-eJ-2Pa" secondAttribute="bottom" constant="59" id="19Q-wr-55p"/>
-                            <constraint firstItem="3BA-rL-qfN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2Sh-q9-ET9"/>
-                            <constraint firstItem="3BA-rL-qfN" firstAttribute="centerX" secondItem="8rq-eJ-2Pa" secondAttribute="centerX" id="Bfk-HF-0pM"/>
-                            <constraint firstItem="3BA-rL-qfN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="c3A-eU-sYw"/>
-                            <constraint firstItem="8rq-eJ-2Pa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-6" id="e1k-EP-5pE"/>
-                            <constraint firstItem="8rq-eJ-2Pa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jS3-Yd-6E8"/>
+                            <constraint firstItem="3BA-rL-qfN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="E1y-5R-sg0"/>
+                            <constraint firstItem="XES-kq-r5g" firstAttribute="baseline" secondItem="3BA-rL-qfN" secondAttribute="baseline" id="Vq7-UV-bMU"/>
+                            <constraint firstItem="8rq-eJ-2Pa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cNd-O7-n8K"/>
+                            <constraint firstItem="8rq-eJ-2Pa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="d4X-5x-zw1"/>
+                            <constraint firstItem="XES-kq-r5g" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="k69-s4-shi"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3BA-rL-qfN" secondAttribute="bottom" constant="8" symbolic="YES" id="tCS-NB-DEr"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="hLH-96-Y7y">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="profile" style="plain" id="x2v-I5-Z7p">
+                            <connections>
+                                <segue destination="kF4-3r-lwx" kind="custom" customClass="SegueFromLeft" customModule="TinderClone" customModuleProvider="target" id="Sga-Gs-Wdh"/>
+                            </connections>
+                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="fer-FU-TS6">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <segments>
+                                <segment title="" image="tinderLogo"/>
+                                <segment title="" image="group"/>
+                            </segments>
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" image="chat" style="plain" id="zgx-t5-p7j">
+                            <connections>
+                                <action selector="chatBarButtonTapped:" destination="BYZ-38-t0r" id="KDK-ks-WAF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cardView" destination="8rq-eJ-2Pa" id="AmQ-Hf-fmu"/>
+                        <outlet property="chatBarButton" destination="zgx-t5-p7j" id="xtX-12-0Lf"/>
                         <outlet property="likeImageView" destination="8CY-tn-3dg" id="nC0-yu-jMb"/>
                         <outlet property="nopeImageView" destination="XqJ-OT-iwb" id="zda-PR-rPn"/>
+                        <outlet property="profileBarButton" destination="x2v-I5-Z7p" id="F0E-s8-xV4"/>
+                        <outlet property="segmentedController" destination="fer-FU-TS6" id="4MN-pI-Vk8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -93,11 +133,141 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="1113.75" y="122.53521126760563"/>
+        </scene>
+        <!--ProfileVC-->
+        <scene sceneID="Bel-Wk-X5z">
+            <objects>
+                <viewController storyboardIdentifier="ProfileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QDn-eH-k34" customClass="ProfileVC" customModule="TinderClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Qg-8f-dbf"/>
+                        <viewControllerLayoutGuide type="bottom" id="yDo-rX-gw7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BFo-H0-rsb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4Hs-z6-NU8">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Pwn-Cn-pFX">
+                            <rect key="frame" x="140" y="7" width="40" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="profile"/>
+                        </button>
+                        <barButtonItem key="rightBarButtonItem" image="tinderLogo" style="plain" id="4Fd-eH-8mH">
+                            <connections>
+                                <action selector="tinderLogButtonTapped:" destination="QDn-eH-k34" id="v3u-B3-bXt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="profilebutton" destination="Pwn-Cn-pFX" id="c0r-V0-GBJ"/>
+                        <outlet property="tinderlogoBtton" destination="4Fd-eH-8mH" id="NU1-mT-LOy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lap-ZO-uzp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2932.5" y="122.53521126760563"/>
+        </scene>
+        <!--ChatVC-->
+        <scene sceneID="GrW-xn-igZ">
+            <objects>
+                <viewController storyboardIdentifier="ChatVC" id="FVm-uU-w3J" customClass="ChatVC" customModule="TinderClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L2n-9w-n9X"/>
+                        <viewControllerLayoutGuide type="bottom" id="fco-hJ-rMy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ijo-BG-zCZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iFs-MP-kXk">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="tinderLogo" id="ksk-gQ-HY8">
+                            <connections>
+                                <action selector="tinderlogoTapped:" destination="FVm-uU-w3J" id="nTo-nt-gcP"/>
+                            </connections>
+                        </barButtonItem>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ReM-HN-sOg">
+                            <rect key="frame" x="145" y="7" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="chat"/>
+                        </button>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="chatbutton" destination="ReM-HN-sOg" id="kFJ-aH-h7s"/>
+                        <outlet property="tinderlogoBtton" destination="ksk-gQ-HY8" id="sL7-Jq-4Da"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kqX-ww-cjD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2933" y="-610"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pyz-Mn-f4Z">
+            <objects>
+                <navigationController storyboardIdentifier="MainVCNAV" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RK0-35-7SF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ijy-l7-cvS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="y7x-18-vSH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kUb-4V-DRU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="116.25" y="122.53521126760563"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="s3V-Og-ZjV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ARH-O7-Exu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nXi-aI-YVh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FVm-uU-w3J" kind="relationship" relationship="rootViewController" id="hjN-ag-ckd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m6y-gS-hvI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1935" y="-610"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4ur-U5-cog">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kF4-3r-lwx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zfa-79-zng">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QDn-eH-k34" kind="relationship" relationship="rootViewController" id="I37-6p-3Gb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GYa-DT-uKH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1935" y="122.53521126760563"/>
         </scene>
     </scenes>
     <resources>
         <image name="beautiful-1274051_960_720" width="332" height="376"/>
+        <image name="chat" width="24" height="24"/>
+        <image name="group" width="24" height="24"/>
+        <image name="profile" width="24" height="24"/>
+        <image name="tinderLogo" width="24" height="24"/>
         <image name="unlike" width="24" height="24"/>
     </resources>
 </document>
