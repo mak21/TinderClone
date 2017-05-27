@@ -18,10 +18,24 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+      handleImage()
     }
     
-   
+  func handleImage(){
     
+    profilePicture.isUserInteractionEnabled = true
+    let tap = UITapGestureRecognizer(target: self, action: #selector(chooseProfileImage))
+    profilePicture.addGestureRecognizer(tap)
+    
+  }
+  
+  func chooseProfileImage(){
+    let picker = UIImagePickerController()
+    picker.delegate = self
+    picker.allowsEditing = true
+    present(picker, animated: true, completion: nil)
+  }
+  
     @IBAction func signUpButtonPressed(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text,let confirmPassword = confirmPasswordTextField.text  else {
                 present(AlertControl.displayAlertWithTitle(title: "Error", message: "Form is not valid"), animated: true, completion: nil)
@@ -45,7 +59,8 @@ class SignUpVC: UIViewController {
      let imageName = self.emailTextField.text
      let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName ?? uid).jpg")
      
-     if let profileImage = self.profilePicture.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
+     if let profileImage = self.profilePicture.image,
+      let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
      storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
      if error != nil {
      print(error!)
@@ -79,3 +94,33 @@ class SignUpVC: UIViewController {
     }
     
 }
+extension SignUpVC : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
+  {
+    print("User canceled out of picker")
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+  {
+    var selectedImageFromPicker: UIImage?
+    if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage
+    {
+      selectedImageFromPicker = editedImage
+      
+    } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage
+    {
+      selectedImageFromPicker = originalImage
+    }
+    
+    if let selectedImage = selectedImageFromPicker
+    {
+      profilePicture.image = selectedImage
+    }
+    
+    dismiss(animated: true, completion: nil)
+  }
+  
+}
+

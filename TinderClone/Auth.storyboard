@@ -161,6 +161,13 @@
                                     <action selector="signUpButtonPressed:" destination="gPm-RM-fWQ" eventType="touchUpInside" id="FXa-gm-0O5"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="wg5-qL-0cP">
+                                <rect key="frame" x="40" y="98" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="PdN-jc-5eO"/>
+                                    <constraint firstAttribute="height" constant="128" id="hhM-KC-DEM"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -169,7 +176,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="06p-TQ-feX" secondAttribute="trailing" id="HBn-dj-k0k"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FAl-hX-7gw" secondAttribute="trailing" constant="15" id="YA1-jf-t2H"/>
                             <constraint firstItem="FAl-hX-7gw" firstAttribute="leading" secondItem="C0J-oG-WJT" secondAttribute="leadingMargin" constant="15" id="a2O-Xt-msj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wg5-qL-0cP" secondAttribute="trailing" constant="24" id="aK8-cy-Lu3"/>
+                            <constraint firstItem="wg5-qL-0cP" firstAttribute="leading" secondItem="C0J-oG-WJT" secondAttribute="leadingMargin" constant="24" id="mFf-ds-51u"/>
                             <constraint firstItem="IXP-Dm-k8H" firstAttribute="top" secondItem="FAl-hX-7gw" secondAttribute="bottom" constant="50" id="orn-O1-Z3I"/>
+                            <constraint firstItem="wg5-qL-0cP" firstAttribute="top" secondItem="qRK-1W-I6h" secondAttribute="bottom" constant="34" id="v6w-pr-abH"/>
+                            <constraint firstItem="06p-TQ-feX" firstAttribute="top" secondItem="wg5-qL-0cP" secondAttribute="bottom" constant="37" id="yss-Bd-hxP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SignUP" id="Szo-pp-tWT">
@@ -184,6 +195,7 @@
                         <outlet property="emailTextField" destination="3XH-VB-tpx" id="qma-Az-e57"/>
                         <outlet property="nameTextField" destination="MBE-B7-6tc" id="fhV-cp-zbq"/>
                         <outlet property="passwordTextField" destination="BGv-SN-y3m" id="vcS-Ue-Bzn"/>
+                        <outlet property="profilePicture" destination="wg5-qL-0cP" id="cD2-0X-RHH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3t2-Cx-2Wm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -209,4 +221,7 @@
             <point key="canvasLocation" x="849" y="63"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="profile" width="24" height="24"/>
+    </resources>
 </document>
