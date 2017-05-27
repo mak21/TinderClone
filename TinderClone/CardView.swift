@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 class CardView {
   
   static func handleSwipe(_ sender: UIPanGestureRecognizer, superView: UIView!, cardView: UIView, likeImageView: UIImageView, nopeImageView: UIImageView) {
@@ -42,6 +43,8 @@ class CardView {
         
       }else if card.center.x > (superView.frame.width - 75){
         // the view should move to the right
+     FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid).updateChildValues(["matches/\("dsfsdf")" : true ])
+        
         UIView.animate(withDuration: 0.2, animations: {
           card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
           card.alpha = 0
@@ -62,7 +65,8 @@ class CardView {
       cardView.transform = .identity
     }
   }
-  
+    
+
  
   
 }

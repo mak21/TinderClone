@@ -1,38 +1,24 @@
 //
-//  ChatVC.swift
+//  chatVC.swift
 //  TinderClone
 //
-//  Created by mahmoud khudairi on 5/26/17.
+//  Created by mahmoud khudairi on 5/27/17.
 //  Copyright © 2017 mahmoud khudairi. All rights reserved.
 //
 
 import UIKit
+import Firebase
+import JSQMessagesViewController
+class ChatVC: JSQMessagesViewController  {
 
-class ChatVC: UIViewController {
-  @IBOutlet weak var chatbutton: UIButton!{
-    didSet{
-      chatbutton.tintColor = UIColor.red
-    }
-  }
-  @IBOutlet weak var tinderlogoBtton: UIBarButtonItem!{
-    didSet{
-      tinderlogoBtton.tintColor = UIColor.lightGray
-    }
-  }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      self.senderId = FIRAuth.auth()?.currentUser?.uid
+      self.senderDisplayName = "testing"
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+   
 
-  @IBAction func tinderlogoTapped(_ sender: Any) {
-    navigationController?.popViewController(animated: true)
-  }
-  
+
 }

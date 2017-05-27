@@ -93,6 +93,7 @@ class LoginVC: UIViewController {
                 print("Unable to authenticate with Firebase - \(String(describing: error))")
             } else {
                 print("Successfully authenticated with Firebase")
+              
                 if let user = user,
                   let name = user.displayName,
                   let email = user.email{

@@ -15,7 +15,7 @@ class User {
   var profileImageUrl: String?
   
   init(dictionary: [String: Any]) {
-    self.id = dictionary["id"] as? String
+    self.id = dictionary["uid"] as? String
     self.name = dictionary["name"] as? String
     self.email = dictionary["email"] as? String
     self.profileImageUrl = dictionary["profileImageUrl"] as? String

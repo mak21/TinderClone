@@ -11,4 +11,6 @@ target 'TinderClone' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'FBSDKLoginKit'
+  pod 'DMSwipeCards'
+  pod 'JSQMessagesViewController'
 end
