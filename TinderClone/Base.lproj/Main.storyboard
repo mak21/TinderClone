@@ -75,7 +75,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="profile" style="plain" id="x2v-I5-Z7p">
                             <connections>
-                                <segue destination="kF4-3r-lwx" kind="custom" customClass="SegueFromLeft" customModule="TinderClone" customModuleProvider="target" id="Sga-Gs-Wdh"/>
+                                <segue destination="kF4-3r-lwx" kind="show" id="Sga-Gs-Wdh"/>
                             </connections>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="fer-FU-TS6">
