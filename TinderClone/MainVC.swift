@@ -11,9 +11,12 @@ import Firebase
 import DMSwipeCards
 
 class MainVC: UIViewController {
+  @IBOutlet weak var heartButton: UIButton!
+  @IBOutlet weak var nopeButton: UIButton!
   private var swipeView: DMSwipeCardsView<String>!
   private var count = 0
   var users : [User] = []
+  var myMatches : [String] = []
   @IBOutlet weak var segmentedController: UISegmentedControl!{
     didSet{
       
@@ -47,19 +50,20 @@ class MainVC: UIViewController {
     var index = 0
     let viewGenerator: (String, CGRect) -> (UIView) = { (element: String, frame: CGRect) -> (UIView) in
            index = Int(element)!
-      
+    
       let container = UIView(frame: CGRect(x: 15, y: 20, width: frame.width - 60, height: frame.height - 40))
       
       let cardImageView = UIImageView(frame: container.bounds)
-      
-      cardImageView.loadImageUsingCacheWithUrlString(self.users[index].profileImageUrl!)
+      if self.users.count != 0 {
+      if let profilePic = self.users[index].profileImagesUrl?.first {
+      cardImageView.loadImageUsingCacheWithUrlString(profilePic)
+      }
       cardImageView.center = container.center
       cardImageView.clipsToBounds = true
       cardImageView.layer.cornerRadius = 16
       container.addSubview(cardImageView)
       container.addSubview(cardImageView)
       let userNamelabel = UILabel(frame: container.bounds)
-      
       userNamelabel.text = self.users[index].name
       userNamelabel.numberOfLines = 10
       userNamelabel.textAlignment = .center
@@ -67,20 +71,15 @@ class MainVC: UIViewController {
       userNamelabel.font = UIFont.systemFont(ofSize: 28, weight: UIFontWeightBold)
       userNamelabel.frame = CGRect(x: 15, y: 370, width: 300, height: 100)
       
- 
       container.addSubview(userNamelabel)
-      
-      container.layer.shadowRadius = 4
-      container.layer.shadowOpacity = 1.0
-      container.layer.shadowColor = UIColor(white: 0.9, alpha: 1.0).cgColor
-      container.layer.shadowOffset = CGSize(width: 0, height: 0)
       container.layer.shouldRasterize = true
       container.layer.rasterizationScale = UIScreen.main.scale
       
-     
+      }
        return container
   }
   
+    
     let overlayGenerator: (SwipeMode, CGRect) -> (UIView) = { (mode: SwipeMode, frame: CGRect) -> (UIView) in
       let label = UILabel()
       label.frame.size = CGSize(width: 100, height: 100)
@@ -105,44 +104,41 @@ class MainVC: UIViewController {
     swipeView.delegate = self
     self.view.addSubview(swipeView)
     
-    self.swipeView.addCards((0...users.count - 1 ).map({"\($0)"}))
-    
+    if users.count == 0{
+   self.swipeView.addCards((0...users.count ).map({"\($0)"}))
+    }else{
+      self.swipeView.addCards((0...users.count - 1 ).map({"\($0)"}))
+    }
   }
   func setupNavigationBar(){
   navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
   navigationController?.navigationBar.shadowImage = UIImage()
   }
-
-  @IBAction func logoutButtonClicked(_ sender: Any) {
-    let firebaseAuth = FIRAuth.auth()
-    do {
-      try firebaseAuth?.signOut()
-      
-    } catch let signOutError as NSError {
-      present(AlertControl.displayAlertWithTitle(title: "Error signing out:", message:" \(signOutError)"), animated: true, completion: nil)
-    }
-    
-    
-    let singInVC =  UIStoryboard(name: "Auth", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
-    present(singInVC, animated: true, completion: nil)
-    
   
-  }
+  
 
   func listenToFirebase() {
     FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
       let dictionary = snapshot.value as! [String:Any]
       let user = User(dictionary: dictionary)
-      self.users.append(user)
-      
+     // filtering the results by adding only the users we didnt match before
+      if user.id! != FIRAuth.auth()?.currentUser?.uid {
+        if !self.myMatches.contains(user.id!){
+            self.users.append(user)
+          }
+      }else{
+        if let matches = user.matches{
+        self.myMatches = matches
+      }
+      }
       DispatchQueue.main.async {
+        
         self.setupCardView()
      
       }
     })
    
- 
-    
+
   }
  
 
@@ -156,25 +152,32 @@ class MainVC: UIViewController {
   }
 }
 extension MainVC: DMSwipeCardsViewDelegate {
-  func swipedLeft(_ object: Any) {
-    print("Swiped left: \(object)")
+  func reachedEndOfStack() {
+    
   }
-  
+
+  func swipedLeft(_ object: Any) {
+    
+  }
+
   func swipedRight(_ object: Any) {
     let index = (object as AnyObject).integerValue
-    print("Swiped right: \(String(describing: index!))")
     
     print(self.users[index!].id!)
    FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid).updateChildValues(["matches/\(self.users[index!].id!)" : true ])
+     FIRDatabase.database().reference().child("users").child(self.users[index!].id!).updateChildValues(["matchedBy/\(FIRAuth.auth()!.currentUser!.uid)" : true ])
     
   }
   
   func cardTapped(_ object: Any) {
-    print("Tapped on: \(object)")
+    
+    guard let index = (object as AnyObject).integerValue else {return}
+    guard let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as? ProfileVC else{return}
+    controller.profileType = .otherProfile
+    controller.userId = self.users[index].id!
+    present(controller, animated: false, completion: nil)
   }
   
-  func reachedEndOfStack() {
-    print("Reached end of stack")
-  }
+  
 }
 

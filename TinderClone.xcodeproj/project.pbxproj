@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240BA03C1EDA77D900CB1E00 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240BA03B1EDA77D900CB1E00 /* Chat.swift */; };
+		240BA03E1EDB2D8800CB1E00 /* FBLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240BA03D1EDB2D8800CB1E00 /* FBLoginVC.swift */; };
+		240BA0401EDB2EB900CB1E00 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240BA03F1EDB2EB900CB1E00 /* GradientButton.swift */; };
 		241579A11ED8495900FDEAB1 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241579A01ED8495900FDEAB1 /* ProfileVC.swift */; };
 		241579A31ED85FB600FDEAB1 /* segueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241579A21ED85FB600FDEAB1 /* segueFromLeft.swift */; };
 		241579A51ED8611E00FDEAB1 /* SearchChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241579A41ED8611E00FDEAB1 /* SearchChatVC.swift */; };
+		243ADC681EDBD69200B524A9 /* profileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243ADC671EDBD69200B524A9 /* profileCollectionViewCell.swift */; };
+		243ADC6A1EDBE0FD00B524A9 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243ADC691EDBE0FD00B524A9 /* EditProfileVC.swift */; };
 		244301BA1ED92D5D00282361 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244301B91ED92D5D00282361 /* User.swift */; };
 		244301BC1ED92E5F00282361 /* ImageView Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244301BB1ED92E5F00282361 /* ImageView Extention.swift */; };
 		244301BE1ED92FAB00282361 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244301BD1ED92FAB00282361 /* CardView.swift */; };
@@ -30,9 +35,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		240BA03B1EDA77D900CB1E00 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		240BA03D1EDB2D8800CB1E00 /* FBLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBLoginVC.swift; sourceTree = "<group>"; };
+		240BA03F1EDB2EB900CB1E00 /* GradientButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
 		241579A01ED8495900FDEAB1 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		241579A21ED85FB600FDEAB1 /* segueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = segueFromLeft.swift; sourceTree = "<group>"; };
 		241579A41ED8611E00FDEAB1 /* SearchChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchChatVC.swift; sourceTree = "<group>"; };
+		243ADC671EDBD69200B524A9 /* profileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileCollectionViewCell.swift; sourceTree = "<group>"; };
+		243ADC691EDBE0FD00B524A9 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		244301B91ED92D5D00282361 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		244301BB1ED92E5F00282361 /* ImageView Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageView Extention.swift"; sourceTree = "<group>"; };
 		244301BD1ED92FAB00282361 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -73,6 +83,7 @@
 			children = (
 				244301B91ED92D5D00282361 /* User.swift */,
 				244301BD1ED92FAB00282361 /* CardView.swift */,
+				240BA03B1EDA77D900CB1E00 /* Chat.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -82,6 +93,7 @@
 			children = (
 				244301C21ED9C32700282361 /* CollectionViewCell.swift */,
 				244301C41ED9E1B400282361 /* SearchCollectionReusableView.swift */,
+				243ADC671EDBD69200B524A9 /* profileCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -89,10 +101,12 @@
 		24C943E51ED7DAE800721DAD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				240BA03D1EDB2D8800CB1E00 /* FBLoginVC.swift */,
 				24C943E61ED7DBCF00721DAD /* LoginVC.swift */,
 				24C943E81ED7DBDA00721DAD /* SignUpVC.swift */,
 				24E44FC81ED73FE600C9FD24 /* MainVC.swift */,
 				241579A01ED8495900FDEAB1 /* ProfileVC.swift */,
+				243ADC691EDBE0FD00B524A9 /* EditProfileVC.swift */,
 				241579A41ED8611E00FDEAB1 /* SearchChatVC.swift */,
 				244301BF1ED9B3C500282361 /* ChatVC.swift */,
 			);
@@ -102,6 +116,7 @@
 		24C943EC1ED7DE1F00721DAD /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				240BA03F1EDB2EB900CB1E00 /* GradientButton.swift */,
 				24C943ED1ED7DEAE00721DAD /* AlertControl.swift */,
 				241579A21ED85FB600FDEAB1 /* segueFromLeft.swift */,
 				244301BB1ED92E5F00282361 /* ImageView Extention.swift */,
@@ -292,6 +307,7 @@
 				241579A31ED85FB600FDEAB1 /* segueFromLeft.swift in Sources */,
 				24C943E91ED7DBDA00721DAD /* SignUpVC.swift in Sources */,
 				24E44FC91ED73FE600C9FD24 /* MainVC.swift in Sources */,
+				240BA03E1EDB2D8800CB1E00 /* FBLoginVC.swift in Sources */,
 				244301C01ED9B3C500282361 /* ChatVC.swift in Sources */,
 				24E44FC71ED73FE600C9FD24 /* AppDelegate.swift in Sources */,
 				244301BA1ED92D5D00282361 /* User.swift in Sources */,
@@ -301,7 +317,11 @@
 				241579A11ED8495900FDEAB1 /* ProfileVC.swift in Sources */,
 				244301BE1ED92FAB00282361 /* CardView.swift in Sources */,
 				24C943EE1ED7DEAE00721DAD /* AlertControl.swift in Sources */,
+				240BA03C1EDA77D900CB1E00 /* Chat.swift in Sources */,
+				240BA0401EDB2EB900CB1E00 /* GradientButton.swift in Sources */,
+				243ADC681EDBD69200B524A9 /* profileCollectionViewCell.swift in Sources */,
 				244301C51ED9E1B500282361 /* SearchCollectionReusableView.swift in Sources */,
+				243ADC6A1EDBE0FD00B524A9 /* EditProfileVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,16 +1,16 @@
 //
 //  SignInVC.swift
-//  FireBaseAuthTypes
+//  TinderClone
 //
-//  Created by mahmoud khudairi on 4/24/17.
+//  Created by mahmoud khudairi on 5/27/17.
 //  Copyright © 2017 mahmoud khudairi. All rights reserved.
 //
 
 import UIKit
 import Firebase
-import FBSDKLoginKit
+
 class LoginVC: UIViewController {
-  @IBOutlet weak var facebookLoginButton: UIButton!
+ 
   @IBOutlet weak var passwordTextField: UITextField!{
     didSet{
       passwordTextField.delegate = self
@@ -25,11 +25,7 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  
    
     @IBAction func signInButtonPressed(_ sender: Any) {
         guard let email = emailTextField.text,
@@ -64,57 +60,6 @@ class LoginVC: UIViewController {
         self.present(homeController, animated: true, completion: nil)
     }
     
-    @IBAction func fbButtonPressed(_ sender: Any) {
-      
-        let facebookLogin = FBSDKLoginManager()
-        
-        facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
-          
-            if error != nil {
-              
-                print("Unable to authenticate with Facebook - \(String(describing: error))")
-            } else if result?.isCancelled == true {
-                print("User cancelled Facebook authentication")
-            } else {
-              
-                print("Successfully authenticated with Facebook")
-              
-                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-              
-                self.handleAuth(credential)
-              
-            }
-        }
-    }
-    func handleAuth(_ credential: FIRAuthCredential) {
-      
-        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
-            if error != nil {
-                print("Unable to authenticate with Firebase - \(String(describing: error))")
-            } else {
-                print("Successfully authenticated with Firebase")
-              
-                if let user = user,
-                  let name = user.displayName,
-                  let email = user.email{
-                  //  let userData = ["provider": credential.provider]
-                   
-                    let values = ["name": name, "email": email, "profileImageUrl": "\(user.photoURL!)", "uid" : user.uid] as [String : Any]
-                    FIRDatabase.database().reference().child("users").child(user.uid).updateChildValues(values, withCompletionBlock: { (err, ref) in
-                        
-                        if err != nil {
-                            print(err!)
-                            return
-                        }
-                    })
-                            
-                    self.presentHome()
-                    
-                }
-            }
-        })
-    }
- 
 }
 extension LoginVC : UITextFieldDelegate{
   public func textFieldShouldReturn(_ textField: UITextField) -> Bool {

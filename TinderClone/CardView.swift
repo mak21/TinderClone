@@ -43,7 +43,7 @@ class CardView {
         
       }else if card.center.x > (superView.frame.width - 75){
         // the view should move to the right
-     FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid).updateChildValues(["matches/\("dsfsdf")" : true ])
+     FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid).updateChildValues(["matches":true])
         
         UIView.animate(withDuration: 0.2, animations: {
           card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)

@@ -57,17 +57,17 @@ class SignUpVC: UIViewController {
             }
      //successfully authenticated user
      let imageName = self.emailTextField.text
-     let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName ?? uid).jpg")
+     let storageRef = FIRStorage.storage().reference().child("profile_images").child((FIRAuth.auth()?.currentUser?.uid)!).child("\(imageName ?? uid).jpg")
      
      if let profileImage = self.profilePicture.image,
-      let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
+      let uploadData = UIImageJPEGRepresentation(profileImage, 0.5) {
      storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
      if error != nil {
      print(error!)
      return
      }
      if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-     let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl, "uid" : uid] as [String : Any]
+      let values = ["name": name, "email": email, "profileImagesUrl": ["0" : profileImageUrl], "uid" : uid] as [String : Any]
      self.registerUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
      
      }

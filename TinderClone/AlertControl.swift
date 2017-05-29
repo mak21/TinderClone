@@ -1,8 +1,8 @@
 //
 //  AlertControl.swift
-//  FireBaseAuthTypes
+//  TinderClone
 //
-//  Created by mahmoud khudairi on 4/24/17.
+//  Created by mahmoud khudairi on 5/26/17.
 //  Copyright © 2017 mahmoud khudairi. All rights reserved.
 //
 

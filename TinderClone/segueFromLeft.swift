@@ -18,7 +18,7 @@ class SegueFromLeft: UIStoryboardSegue
     dst.view.transform = CGAffineTransform(translationX: -src.view.frame.size.width, y: 0)
     
     UIView.animate(withDuration: 0.05,
-                               delay: 0.0,
+                               delay: 0.1,
                                options: UIViewAnimationOptions.curveEaseInOut,
                                animations: {
                                 dst.view.transform = CGAffineTransform(translationX: 0, y: 0)
