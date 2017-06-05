@@ -163,6 +163,7 @@ extension SearchChatVC : UICollectionViewDataSource, UICollectionViewDelegateFlo
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
      guard let chatController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChatVC") as? ChatVC else { return }
+ 
     chatController.receiverUser = users[indexPath.row]
     navigationController?.pushViewController(chatController, animated: true)
   }

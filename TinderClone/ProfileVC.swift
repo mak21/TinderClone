@@ -23,6 +23,11 @@ class ProfileVC: UIViewController {
       didSet{
         collectionView.dataSource = self
         collectionView.delegate = self
+        let cellScaling: CGFloat = 0.85
+        let screenSize = UIScreen.main.bounds.size
+        let cellWidth = floor(screenSize.width * cellScaling)
+        let insetX = (view.bounds.width - cellWidth) / 2.0
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
       }
     
   }
@@ -48,6 +53,7 @@ class ProfileVC: UIViewController {
   }
     override func viewDidLoad() {
         super.viewDidLoad()
+      
       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
       navigationController?.navigationBar.shadowImage = UIImage()
   }
@@ -127,7 +133,26 @@ class ProfileVC: UIViewController {
 }
 extension ProfileVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UISearchBarDelegate{
   
-
+  func scrollToNearestVisibleCollectionViewCell() {
+    let visibleCenterPositionOfScrollView = Float(collectionView.contentOffset.x + (self.collectionView!.bounds.size.width / 2))
+    var closestCellIndex = -1
+    var closestDistance: Float = .greatestFiniteMagnitude
+    for i in 0..<collectionView.visibleCells.count {
+      let cell = collectionView.visibleCells[i]
+      let cellWidth = cell.bounds.size.width
+      let cellCenter = Float(cell.frame.origin.x + cellWidth / 2)
+      
+      // Now calculate closest cell
+      let distance: Float = fabsf(visibleCenterPositionOfScrollView - cellCenter)
+      if distance < closestDistance {
+        closestDistance = distance
+        closestCellIndex = collectionView.indexPath(for: cell)!.row
+      }
+    }
+    if closestCellIndex != -1 {
+      self.collectionView!.scrollToItem(at: IndexPath(row: closestCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+    }
+  }
   
   func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
@@ -148,7 +173,20 @@ extension ProfileVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLa
       cell.editInfoButton.isHidden = true
     }
     cell.profileImage.loadImageUsingCacheWithUrlString(photos[indexPath.row])
+   
+    
     return cell
     
+  }
+}
+extension ProfileVC:UIScrollViewDelegate{
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    scrollToNearestVisibleCollectionViewCell()
+  }
+  
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    if !decelerate {
+      scrollToNearestVisibleCollectionViewCell()
+    }
   }
 }
