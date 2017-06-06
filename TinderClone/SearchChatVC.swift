@@ -44,48 +44,22 @@ class SearchChatVC: UIViewController {
     // Do any additional setup after loading the view.
   }
   
-//  func listenToFirebase() {
-//    FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
-//      let dictionary = snapshot.value as! [String:Any]
-//      let user = User(dictionary: dictionary)
-//      if user.id !=  self.currentUserId{
-//        self.users.append(user)
-//      }
-//     
-//      self.filterdUsers = self.users
-//      DispatchQueue.main.async {
-//        self.usersCollectionView.reloadData()
-//        
-//      }
-//    })
-//  }
   func listenToFirebase() {
     FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
       let dictionary = snapshot.value as! [String:Any]
       let user = User(dictionary: dictionary)
-  if user.id! != FIRAuth.auth()?.currentUser?.uid {
-    print("UID",user.id!)
-    
-  if self.myMatchedUsers.contains(user.id!) && self.myMatchedByOtherUsers.contains(user.id!){
-  self.users.append(user)
-    self.filterdUsers = self.users
-    
-  }
-  }else{
-  if let myMatches = user.matches,
-    let Matchedby = user.matchedBy{
-    self.myMatchedUsers = myMatches
-    self.myMatchedByOtherUsers = Matchedby
-    print("my",self.myMatchedUsers,"\nMyOthers",self.myMatchedByOtherUsers)
-    
-  }
-  }
+      if user.id !=  self.currentUserId{
+        self.users.append(user)
+      }
+     
+      self.filterdUsers = self.users
       DispatchQueue.main.async {
-                self.usersCollectionView.reloadData()
+        self.usersCollectionView.reloadData()
         
-              }
-  })
+      }
+    })
   }
+  
 
   func filterCollectionView(text:String) {
     

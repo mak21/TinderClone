@@ -16,14 +16,11 @@ class MainVC: UIViewController {
   private var swipeView: DMSwipeCardsView<String>!
   private var count = 0
   var users : [User] = []
-  var myMatches : [String] = []
+  var elements : [String] = []
   @IBOutlet weak var segmentedController: UISegmentedControl!{
-    didSet{
-      
+    didSet{      
         segmentedController.backgroundColor = UIColor.clear
       segmentedController.tintColor = UIColor.red
-     
-      
   }
   }
   @IBOutlet weak var chatBarButton: UIBarButtonItem!{
@@ -49,12 +46,14 @@ class MainVC: UIViewController {
   func setupCardView() {
     var index = 0
     let viewGenerator: (String, CGRect) -> (UIView) = { (element: String, frame: CGRect) -> (UIView) in
+      print(element)
+      
            index = Int(element)!
     
       let container = UIView(frame: CGRect(x: 15, y: 20, width: frame.width - 60, height: frame.height - 40))
       
       let cardImageView = UIImageView(frame: container.bounds)
-      if self.users.count != 0 {
+      if self.users.count != 0  {
       if let profilePic = self.users[index].profileImagesUrl?.first {
       cardImageView.loadImageUsingCacheWithUrlString(profilePic)
       }
@@ -103,7 +102,7 @@ class MainVC: UIViewController {
                                          overlayGenerator: overlayGenerator)
     swipeView.delegate = self
     self.view.addSubview(swipeView)
-    
+
     if users.count == 0{
    self.swipeView.addCards((0...users.count ).map({"\($0)"}))
     }else{
@@ -115,21 +114,13 @@ class MainVC: UIViewController {
   navigationController?.navigationBar.shadowImage = UIImage()
   }
   
-  
 
   func listenToFirebase() {
     FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
       let dictionary = snapshot.value as! [String:Any]
       let user = User(dictionary: dictionary)
-     // filtering the results by adding only the users we didnt match before
       if user.id! != FIRAuth.auth()?.currentUser?.uid {
-        if !self.myMatches.contains(user.id!){
             self.users.append(user)
-          }
-      }else{
-        if let matches = user.matches{
-        self.myMatches = matches
-      }
       }
       DispatchQueue.main.async {
         
@@ -140,11 +131,6 @@ class MainVC: UIViewController {
    
 
   }
-  
- 
-
- 
-
   
   @IBAction func chatBarButtonTapped(_ sender: Any) {
     guard let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchChatVC") as? SearchChatVC else{return}
@@ -165,8 +151,8 @@ extension MainVC: DMSwipeCardsViewDelegate {
     let index = (object as AnyObject).integerValue
     
     print(self.users[index!].id!)
-   FIRDatabase.database().reference().child("users").child(FIRAuth.auth()!.currentUser!.uid).updateChildValues(["matches/\(self.users[index!].id!)" : true ])
-     FIRDatabase.database().reference().child("users").child(self.users[index!].id!).updateChildValues(["matchedBy/\(FIRAuth.auth()!.currentUser!.uid)" : true ])
+   FIRDatabase.database().reference().child("matches").child(FIRAuth.auth()!.currentUser!.uid).updateChildValues(["\(self.users[index!].id!)" : true ])
+     FIRDatabase.database().reference().child("matchedBy").child(self.users[index!].id!).updateChildValues(["\(FIRAuth.auth()!.currentUser!.uid)" : true ])
     
   }
   

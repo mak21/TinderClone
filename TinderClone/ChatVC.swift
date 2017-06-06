@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Photos
 import JSQMessagesViewController
 class ChatVC: JSQMessagesViewController  {
   var receiverUser : User?
@@ -16,11 +17,13 @@ class ChatVC: JSQMessagesViewController  {
   var chats: [Chat] = []
   lazy var outgoingBubbleImageView: JSQMessagesBubbleImage = self.setupOutgoingBubble()
   lazy var incomingBubbleImageView: JSQMessagesBubbleImage = self.setupIncomingBubble()
-   var messageRef: FIRDatabaseReference!
+  
    var newMessageRefHandle: FIRDatabaseHandle?
    var updateMessageRefHandle: FIRDatabaseHandle?
    var usersTypingQuery: FIRDatabaseQuery?
-   lazy var userIsTypingRef: FIRDatabaseReference = self.messageRef.child("typingIndicator").child(self.senderId)
+  var storageRef: FIRStorageReference = FIRStorage.storage().reference(forURL: "gs://tinderclone-e0f0b.appspot.com")
+  var messageRef: FIRDatabaseReference!
+  var userIsTypingRef: FIRDatabaseReference = FIRDatabase.database().reference().child("typingIndicator").child((FIRAuth.auth()?.currentUser?.uid)!)
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +36,6 @@ class ChatVC: JSQMessagesViewController  {
       
       self.navigationItem.setRightBarButtonItems([item1], animated: true)
       
-      
-
       collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
       collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
       self.senderId = FIRAuth.auth()?.currentUser?.uid
@@ -45,6 +46,8 @@ class ChatVC: JSQMessagesViewController  {
       
       observeMessages()
     }
+  
+  
   func handleUnmatch()  {
     
     let ac = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -104,26 +107,37 @@ class ChatVC: JSQMessagesViewController  {
   }
   
   func observeMessages() {
-    let messageQuery = messageRef.queryLimited(toLast:25)
+     guard let uid = FIRAuth.auth()?.currentUser?.uid, let toId = receiverUser?.id else {
+     return
+     }
+     
+     let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(uid).child(toId)
+     userMessagesRef.observe(.childAdded, with: { (snapshot) in
+     
+     let messageId = snapshot.key
+     let messagesRef = FIRDatabase.database().reference().child("messages").child(messageId)
+     messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+     
+     guard let messageData = snapshot.value as? [String: Any] else {
+     return
+     }
+     
+      if let id = messageData["sender_id"] as! String!,
+              let name = messageData["receiver_name"] as! String!,
+              let text = messageData["message"] as! String! {
+      
+              self.addMessage(withId: id, name: name, text: text)
+      
+      
+              self.finishReceivingMessage()
+              
+            }
+     
+     }, withCancel: nil)
+     
+     }, withCancel: nil)
     
-    newMessageRefHandle = messageQuery.observe(.childAdded, with: {(snapshot) -> Void in
-      
-      let messageInfo = snapshot.value as! Dictionary<String, Any>
-      guard let messageData = messageInfo as? [String:String] else {
-        return
-      }
-      
-      if let id = messageData["sender_id"] as String!,
-        let name = messageData["receiver_name"] as String!,
-        let text = messageData["message"] as String! {
-        
-        self.addMessage(withId: id, name: name, text: text)
-       
-        
-        self.finishReceivingMessage()
-        
-      }
-    })
+ 
   }
   
   func setupOutgoingBubble() -> JSQMessagesBubbleImage {
@@ -141,16 +155,36 @@ class ChatVC: JSQMessagesViewController  {
       messages.append(message)
     }
   }
-
+  
 }
 extension ChatVC {
+  override func didPressAccessoryButton(_ sender: UIButton) {
+
+  }
   override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-     let itemRef = messageRef.childByAutoId()
-    if let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text){
-            let sentDict = ["sender_id" : message.senderId!, "receiver_id" : receiverUser?.id,"receiver_name":"", "message" : message.text!]
     
-    itemRef.setValue(sentDict)
-      //addMessage(withId: currentUserId!, name: "me", text: message.text!)
+    if let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text),
+      let toId = receiverUser?.id,
+      let fromId = senderId{
+      let ref = FIRDatabase.database().reference().child("messages")
+      let childRef = ref.childByAutoId()
+      let timestamp = Int(Date().timeIntervalSince1970)
+      
+      let values: [String: Any] = ["receiver_id": toId , "sender_id": fromId , "timestamp": timestamp,"message" : message.text!,"receiver_name":""]
+      childRef.updateChildValues(values) { (error, ref) in
+        if error != nil {
+          print(error!)
+          return
+        }
+        let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId).child(toId)
+        
+        let messageId = childRef.key
+        userMessagesRef.updateChildValues([messageId: true])
+        
+        let recipientUserMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toId).child(fromId)
+        recipientUserMessagesRef.updateChildValues([messageId: true])
+      }
+      
     }
     JSQSystemSoundPlayer.jsq_playMessageSentSound()
     
@@ -174,8 +208,6 @@ extension ChatVC {
   }
   
   override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
-    let bubbleFactory = JSQMessagesBubbleImageFactory()
-    
     let message = messages[indexPath.row]
     
     guard let id = FIRAuth.auth()?.currentUser?.uid else {return nil}
@@ -212,3 +244,4 @@ extension ChatVC {
     isTyping = textView.text != ""
   }
 }
+

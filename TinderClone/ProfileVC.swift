@@ -23,11 +23,6 @@ class ProfileVC: UIViewController {
       didSet{
         collectionView.dataSource = self
         collectionView.delegate = self
-        let cellScaling: CGFloat = 0.85
-        let screenSize = UIScreen.main.bounds.size
-        let cellWidth = floor(screenSize.width * cellScaling)
-        let insetX = (view.bounds.width - cellWidth) / 2.0
-        collectionView?.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
       }
     
   }
@@ -53,7 +48,11 @@ class ProfileVC: UIViewController {
   }
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+      let cellScaling: CGFloat = 0.85
+      let screenSize = UIScreen.main.bounds.size
+      let cellWidth = floor(screenSize.width * cellScaling)
+      let insetX = (view.bounds.width - cellWidth) / 2.0
+      collectionView?.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
       navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
       navigationController?.navigationBar.shadowImage = UIImage()
   }

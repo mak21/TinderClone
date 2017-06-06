@@ -20,18 +20,5 @@ class User {
     self.name = dictionary["name"] as? String
     self.email = dictionary["email"] as? String
     self.profileImagesUrl = dictionary["profileImagesUrl"] as? [String]
-    guard let dict = dictionary["matches"] as? [String:Any] else {return}
-    var m = [String]()
-    for(k,_) in dict{
-    m.append(k)
-  }
-    self.matches = m
-    guard let matchedBydict = dictionary["matchedBy"] as? [String:Any] else {return}
-    var match = [String]()
-    for(k,_) in matchedBydict{
-      match.append(k)
-    }
-    self.matchedBy = match
-    
   }
 }
